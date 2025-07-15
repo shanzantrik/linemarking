@@ -1,0 +1,78 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FiPhone, FiMail, FiMapPin, FiMenu, FiX } from 'react-icons/fi';
+
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  return (
+    <header className="w-full sticky top-0 z-50 bg-white shadow-sm">
+      {/* Top Info Bar */}
+      <div className="w-full bg-slate-900 text-white text-xs py-2 px-4">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+          <div className="flex items-center gap-4 flex-wrap justify-center">
+            <span className="flex items-center gap-1"><FiPhone className="inline-block" /> 1300 LINE MARK</span>
+            <span className="hidden md:inline-block">|</span>
+            <span className="flex items-center gap-1"><FiMail className="inline-block" /> info@linemarkingaustralia.com.au</span>
+          </div>
+          <div className="flex items-center gap-2 mt-1 md:mt-0 justify-center">
+            <FiMapPin className="inline-block" />
+            <span>Sydney, NSW | Servicing All Australia</span>
+          </div>
+        </div>
+      </div>
+      {/* Main Nav Bar */}
+      <div className="w-full bg-white py-3 px-4 border-b border-slate-100">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          {/* Logo and Company Name */}
+          <Link to="/" className="flex items-center gap-3">
+            <div className="bg-orange-500 text-white font-bold text-lg rounded-md px-3 py-2">LM</div>
+            <div className="flex flex-col leading-tight">
+              <span className="font-semibold text-slate-900 text-base md:text-lg">Line Marking Australia</span>
+              <span className="text-xs text-slate-500">Professional Since 1995</span>
+            </div>
+          </Link>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6 ml-8">
+            <Link to="/#services" className="text-slate-700 hover:text-orange-500 font-medium transition">Services</Link>
+            <Link to="/#why-choose-us" className="text-slate-700 hover:text-orange-500 font-medium transition">Why Choose Us</Link>
+            <Link to="/#portfolio" className="text-slate-700 hover:text-orange-500 font-medium transition">Portfolio</Link>
+            <Link to="/#about" className="text-slate-700 hover:text-orange-500 font-medium transition">About</Link>
+            <Link to="/#contact" className="text-slate-700 hover:text-orange-500 font-medium transition">Contact</Link>
+            {/* Inner Pages */}
+            <Link to="/sydney" className="text-slate-700 hover:text-orange-500 font-medium transition">Sydney</Link>
+            <Link to="/melbourne" className="text-slate-700 hover:text-orange-500 font-medium transition">Melbourne</Link>
+            <Link to="/south-australia" className="text-slate-700 hover:text-orange-500 font-medium transition">South Australia</Link>
+          </nav>
+          {/* Mobile Hamburger */}
+          <button className="md:hidden ml-2 p-2 rounded hover:bg-slate-100" onClick={() => setMenuOpen(v => !v)} aria-label="Open menu">
+            {menuOpen ? <FiX className="text-2xl" /> : <FiMenu className="text-2xl" />}
+          </button>
+          {/* Free Quote Button */}
+          <Link to="/#quote" className="ml-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-md shadow transition-all text-sm md:text-base">
+            Free Quote
+          </Link>
+        </div>
+        {/* Mobile Menu Drawer */}
+        {menuOpen && (
+          <div className="md:hidden fixed inset-0 bg-black bg-opacity-40 z-50" onClick={() => setMenuOpen(false)}>
+            <div className="absolute top-0 right-0 w-64 h-full bg-white shadow-lg flex flex-col p-6 gap-4" onClick={e => e.stopPropagation()}>
+              <button className="self-end mb-2" onClick={() => setMenuOpen(false)} aria-label="Close menu"><FiX className="text-2xl" /></button>
+              <Link to="/#services" className="py-2 text-slate-700 hover:text-orange-500 font-medium" onClick={() => setMenuOpen(false)}>Services</Link>
+              <Link to="/#why-choose-us" className="py-2 text-slate-700 hover:text-orange-500 font-medium" onClick={() => setMenuOpen(false)}>Why Choose Us</Link>
+              <Link to="/#portfolio" className="py-2 text-slate-700 hover:text-orange-500 font-medium" onClick={() => setMenuOpen(false)}>Portfolio</Link>
+              <Link to="/#about" className="py-2 text-slate-700 hover:text-orange-500 font-medium" onClick={() => setMenuOpen(false)}>About</Link>
+              <Link to="/#contact" className="py-2 text-slate-700 hover:text-orange-500 font-medium" onClick={() => setMenuOpen(false)}>Contact</Link>
+              {/* Inner Pages */}
+              <Link to="/sydney" className="py-2 text-slate-700 hover:text-orange-500 font-medium" onClick={() => setMenuOpen(false)}>Sydney</Link>
+              <Link to="/melbourne" className="py-2 text-slate-700 hover:text-orange-500 font-medium" onClick={() => setMenuOpen(false)}>Melbourne</Link>
+              <Link to="/south-australia" className="py-2 text-slate-700 hover:text-orange-500 font-medium" onClick={() => setMenuOpen(false)}>South Australia</Link>
+              <Link to="/#quote" className="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-md shadow text-center" onClick={() => setMenuOpen(false)}>Free Quote</Link>
+            </div>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
+
+export default Header;
